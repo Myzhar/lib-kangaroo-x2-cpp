@@ -24,21 +24,25 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 #include "tools.hpp"
 
 KangarooCommandWriter::KangarooCommandWriter()
-    : /*_address(0), _command(0),*/ _length(0) {
+: /*_address(0), _command(0),*/ _length(0)
+{
   memset(_data, 0, sizeof(_data));
 }
 
-void KangarooCommandWriter::write(uint8_t data) { _data[_length++] = data; }
+void KangarooCommandWriter::write(uint8_t data) {_data[_length++] = data;}
 
-void KangarooCommandWriter::write(const uint8_t* data, size_t length) {
+void KangarooCommandWriter::write(const uint8_t * data, size_t length)
+{
   for (size_t i = 0; i < length; i++) {
     write(data[i]);
   }
 }
 
-void KangarooCommandWriter::writeBitPackedNumber(int32_t number) {
-  number = constrain(number, -KANGAROO_BIT_PACKED_MAX_VALUE,
-                     KANGAROO_BIT_PACKED_MAX_VALUE);
+void KangarooCommandWriter::writeBitPackedNumber(int32_t number)
+{
+  number = constrain(
+    number, -KANGAROO_BIT_PACKED_MAX_VALUE,
+    KANGAROO_BIT_PACKED_MAX_VALUE);
 
   uint32_t encodedNumber;
   if (number < 0) {
@@ -56,15 +60,19 @@ void KangarooCommandWriter::writeBitPackedNumber(int32_t number) {
   } while (encodedNumber);
 }
 
-size_t KangarooCommandWriter::writeToBuffer(uint8_t* buffer, uint8_t address,
-                                            KangarooCommand command) const {
+size_t KangarooCommandWriter::writeToBuffer(
+  uint8_t * buffer, uint8_t address,
+  KangarooCommand command) const
+{
   return writeToBuffer(buffer, address, command, data(), length());
 }
 
-size_t KangarooCommandWriter::writeToBuffer(uint8_t* buffer, uint8_t address,
-                                            KangarooCommand command,
-                                            const uint8_t* data,
-                                            size_t lengthOfData) {
+size_t KangarooCommandWriter::writeToBuffer(
+  uint8_t * buffer, uint8_t address,
+  KangarooCommand command,
+  const uint8_t * data,
+  size_t lengthOfData)
+{
   size_t i = 0;
 
   buffer[i++] = address;
@@ -81,17 +89,21 @@ size_t KangarooCommandWriter::writeToBuffer(uint8_t* buffer, uint8_t address,
   return i;
 }
 
-void KangarooCommandWriter::writeToStream(Stream& port, uint8_t address,
-                                          KangarooCommand command) const {
+void KangarooCommandWriter::writeToStream(
+  Stream & port, uint8_t address,
+  KangarooCommand command) const
+{
   writeToStream(port, address, command, data(), length());
 }
 
-void KangarooCommandWriter::writeToStream(Stream& port, uint8_t address,
-                                          KangarooCommand command,
-                                          const uint8_t* data,
-                                          size_t lengthOfData) {
+void KangarooCommandWriter::writeToStream(
+  Stream & port, uint8_t address,
+  KangarooCommand command,
+  const uint8_t * data,
+  size_t lengthOfData)
+{
   uint8_t buffer[KANGAROO_COMMAND_MAX_BUFFER_LENGTH];
   size_t lengthOfBuffer =
-      writeToBuffer(buffer, address, command, data, lengthOfData);
+    writeToBuffer(buffer, address, command, data, lengthOfData);
   port.writeBuffer(buffer, lengthOfBuffer);
 }

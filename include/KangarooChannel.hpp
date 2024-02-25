@@ -18,11 +18,12 @@ channel of the Kangaroo.
 Any number of KangarooChannel objects can be associated with a single
 KangarooSerial object.
 */
-class KangarooChannel {
+class KangarooChannel
+{
   friend class Kangaroo;
   friend class KangarooMonitor;
 
- public:
+public:
   /*!
   Constructs a KangarooChannel object.
   \param serial The KangarooSerial whose serial port the controller is on.
@@ -38,24 +39,25 @@ class KangarooChannel {
   TX/S1 line between your Kangaroo and a Sabertooth or SyRen motor driver set in
   Packet Serial, however, make sure they aren't both using the same address.
   */
-  KangarooChannel(KangarooSerial& serial, char name,
-                  uint8_t address = KANGAROO_DEFAULT_ADDRESS);
+  KangarooChannel(
+    KangarooSerial & serial, char name,
+    uint8_t address = KANGAROO_DEFAULT_ADDRESS);
   ~KangarooChannel();
 
- public:
+public:
   /*!
   Gets the channel name.
   \return The channel name.
   */
-  inline char name() const { return _name; }
+  inline char name() const {return _name;}
 
   /*!
   Gets the Packet Serial address of the controller.
   \return The packet serial address of the controller.
   */
-  inline uint8_t address() const { return _address; }
+  inline uint8_t address() const {return _address;}
 
- public:
+public:
   /*!
   Starts the channel. Also, the Kangaroo LED will shine brightly for a third of
   a second.
@@ -100,9 +102,10 @@ class KangarooChannel {
   \param flags             Modifiers for the move command.
   \return A KangarooMonitor for tracking the move request.
   */
-  KangarooMonitor setPos(int32_t position,
-                         int32_t speedLimit = KANGAROO_UNSPECIFIED_LIMIT,
-                         KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
+  KangarooMonitor setPos(
+    int32_t position,
+    int32_t speedLimit = KANGAROO_UNSPECIFIED_LIMIT,
+    KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
 
   /*!
   Makes an incremental move, relative to where you are right now.
@@ -112,9 +115,10 @@ class KangarooChannel {
   \param flags             Modifiers for the move command.
   \return A KangarooMonitor for tracking the move request.
   */
-  KangarooMonitor incrPos(int32_t positionIncrement,
-                          int32_t speedLimit = KANGAROO_UNSPECIFIED_LIMIT,
-                          KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
+  KangarooMonitor incrPos(
+    int32_t positionIncrement,
+    int32_t speedLimit = KANGAROO_UNSPECIFIED_LIMIT,
+    KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
 
   /*!
   Makes an incremental move, relative to the current position setpoint.
@@ -125,9 +129,10 @@ class KangarooChannel {
   \param flags             Modifiers for the move command.
   \return A KangarooMonitor for tracking the move request.
   */
-  KangarooMonitor incrPosRel(int32_t positionIncrement,
-                             int32_t speedLimit = KANGAROO_UNSPECIFIED_LIMIT,
-                             KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
+  KangarooMonitor incrPosRel(
+    int32_t positionIncrement,
+    int32_t speedLimit = KANGAROO_UNSPECIFIED_LIMIT,
+    KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
 
   /*!
   Moves at a particular speed.
@@ -137,8 +142,8 @@ class KangarooChannel {
   \return A KangarooMonitor for tracking the move request.
   */
   KangarooMonitor setSpeed(
-      int32_t speed, int32_t speedRampingLimit = KANGAROO_UNSPECIFIED_LIMIT,
-      KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
+    int32_t speed, int32_t speedRampingLimit = KANGAROO_UNSPECIFIED_LIMIT,
+    KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
 
   /*!
   Moves at a particular speed, incremental from the current speed.
@@ -148,9 +153,9 @@ class KangarooChannel {
   \return A KangarooMonitor for tracking the move request.
   */
   KangarooMonitor incrSpeed(
-      int32_t speedIncrement,
-      int32_t speedRampingLimit = KANGAROO_UNSPECIFIED_LIMIT,
-      KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
+    int32_t speedIncrement,
+    int32_t speedRampingLimit = KANGAROO_UNSPECIFIED_LIMIT,
+    KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
 
   /*!
   Moves at a particular speed, incremental from the current speed setpoint.
@@ -164,26 +169,28 @@ class KangarooChannel {
   \return A KangarooMonitor for tracking the move request.
   */
   KangarooMonitor incrSpeedRel(
-      int32_t speedIncrement,
-      int32_t speedRampingLimit = KANGAROO_UNSPECIFIED_LIMIT,
-      KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
+    int32_t speedIncrement,
+    int32_t speedRampingLimit = KANGAROO_UNSPECIFIED_LIMIT,
+    KangarooMoveFlags flags = KANGAROO_MOVE_DEFAULT);
 
- public:
+public:
   /*!
   Issues a 'get' request.
   \param type The type of the 'get' request.
   \param flags Flags modifying the 'get' request.
   \return A \ref KangarooStatus object describing the response.
   */
-  KangarooStatus getVal(KangarooGetType type,
-                        KangarooGetFlags flags = KANGAROO_GET_DEFAULT);
+  KangarooStatus getVal(
+    KangarooGetType type,
+    KangarooGetFlags flags = KANGAROO_GET_DEFAULT);
 
   /*!
   Gets the absolute position.
   \param flags Flags modifying the 'get' request.
   \return A \ref KangarooStatus object describing the position.
   */
-  inline KangarooStatus getPos(KangarooGetFlags flags = KANGAROO_GET_DEFAULT) {
+  inline KangarooStatus getPos(KangarooGetFlags flags = KANGAROO_GET_DEFAULT)
+  {
     return getVal(KANGAROO_GETP, flags);
   }
 
@@ -194,7 +201,8 @@ class KangarooChannel {
   \return A \ref KangarooStatus object describing the position.
   */
   inline KangarooStatus getIncrPos(
-      KangarooGetFlags flags = KANGAROO_GET_DEFAULT) {
+    KangarooGetFlags flags = KANGAROO_GET_DEFAULT)
+  {
     return getVal(KANGAROO_GETPI, flags);
   }
 
@@ -205,7 +213,8 @@ class KangarooChannel {
   \return A \ref KangarooStatus object describing the position.
   */
   inline KangarooStatus getSetPointPos(
-      KangarooGetFlags flags = KANGAROO_GET_DEFAULT) {
+    KangarooGetFlags flags = KANGAROO_GET_DEFAULT)
+  {
     return getVal(KANGAROO_GETPS, flags);
   }
 
@@ -215,7 +224,8 @@ class KangarooChannel {
   \return A \ref KangarooStatus object describing the speed.
   */
   inline KangarooStatus getSpeed(
-      KangarooGetFlags flags = KANGAROO_GET_DEFAULT) {
+    KangarooGetFlags flags = KANGAROO_GET_DEFAULT)
+  {
     return getVal(KANGAROO_GETS, flags);
   }
 
@@ -225,7 +235,8 @@ class KangarooChannel {
   \param flags Flags modifying the 'get' request.
   \return A \ref KangarooStatus object describing the speed.
   */
-  inline KangarooStatus getIncrSpeed(KangarooGetFlags flags = KANGAROO_GET_DEFAULT) {
+  inline KangarooStatus getIncrSpeed(KangarooGetFlags flags = KANGAROO_GET_DEFAULT)
+  {
     return getVal(KANGAROO_GETSI, flags);
   }
 
@@ -235,7 +246,8 @@ class KangarooChannel {
   \param flags Flags modifying the 'get' request.
   \return A \ref KangarooStatus object describing the speed.
   */
-  inline KangarooStatus getSetPointSpeed(KangarooGetFlags flags = KANGAROO_GET_DEFAULT) {
+  inline KangarooStatus getSetPointSpeed(KangarooGetFlags flags = KANGAROO_GET_DEFAULT)
+  {
     return getVal(KANGAROO_GETSS, flags);
   }
 
@@ -245,7 +257,8 @@ class KangarooChannel {
   \param flags Flags modifying the 'get' request.
   \return A \ref KangarooStatus object describing the limit.
   */
-  inline KangarooStatus getMin(KangarooGetFlags flags = KANGAROO_GET_DEFAULT) {
+  inline KangarooStatus getMin(KangarooGetFlags flags = KANGAROO_GET_DEFAULT)
+  {
     return getVal(KANGAROO_GETMIN, flags);
   }
 
@@ -255,37 +268,39 @@ class KangarooChannel {
   \param flags Flags modifying the 'get' request.
   \return A \ref KangarooStatus object describing the limit.
   */
-  inline KangarooStatus getMax(KangarooGetFlags flags = KANGAROO_GET_DEFAULT) {
+  inline KangarooStatus getMax(KangarooGetFlags flags = KANGAROO_GET_DEFAULT)
+  {
     return getVal(KANGAROO_GETMAX, flags);
   }
 
- public:
+public:
   /*! Gets the command retry interval.
   \return The command retry interval, in milliseconds.
   */
-  inline int32_t commandRetryInterval() const { return _commandRetryInterval; }
+  inline int32_t commandRetryInterval() const {return _commandRetryInterval;}
 
   /*! Sets the command retry interval.
   \param intervalMS The command retry interval, in milliseconds.
   */
-  inline void commandRetryInterval(int32_t intervalMS) {
+  inline void commandRetryInterval(int32_t intervalMS)
+  {
     _commandRetryInterval = intervalMS;
   }
 
   /*! Gets the command timeout.
   \return The command timeout, in milliseconds.
   */
-  inline int32_t commandTimeout() const { return _commandTimeout; }
+  inline int32_t commandTimeout() const {return _commandTimeout;}
 
   /*! Sets the command timeout.
   \param timeoutMS The command timeout, in milliseconds.
   */
-  inline void commandTimeout(int32_t timeoutMS) { _commandTimeout = timeoutMS; }
+  inline void commandTimeout(int32_t timeoutMS) {_commandTimeout = timeoutMS;}
 
   /*! Gets whether streaming is enabled.
   \return True if streaming is enabled.
   */
-  inline bool streaming() const { return _streaming; }
+  inline bool streaming() const {return _streaming;}
 
   /*!
   Enables or disables streaming.
@@ -301,7 +316,7 @@ class KangarooChannel {
   streaming. KangarooMonitor::wait() cannot be meaningfully called for a command
   that was streamed.
   */
-  inline void streaming(bool enabled) { _streaming = enabled; }
+  inline void streaming(bool enabled) {_streaming = enabled;}
 
   /*!
   Sets the baud rate.
@@ -342,34 +357,41 @@ class KangarooChannel {
   \param valueCount    The number of parameters.
   \return A KangarooError.
   */
-  KangarooError systemCommand(KangarooSystemCommand systemCommand,
-                              bool expectReply, int32_t values[],
-                              size_t valueCount);
+  KangarooError systemCommand(
+    KangarooSystemCommand systemCommand,
+    bool expectReply, int32_t values[],
+    size_t valueCount);
 
- private:
-  KangarooStatus getSpecial(KangarooGetType type, KangarooGetFlags flags,
-                            const KangarooTimeout& timeout);
-  KangarooMonitor motion(uint8_t motionType, int32_t motionValue,
-                         uint8_t limit1Type, int32_t limit1Value,
-                         uint8_t limit2Type, int32_t limit2Value,
-                         KangarooMoveFlags flags);
-  KangarooMonitor set(KangarooCommand command, KangarooCommandWriter& contents,
-                      KangarooMoveFlags moveFlags = KANGAROO_MOVE_DEFAULT,
-                      KangarooGetType getType = KANGAROO_GETP);
-  void setNoReply(KangarooCommand command, KangarooCommandWriter& contents,
-                  KangarooMoveFlags moveFlags = KANGAROO_MOVE_DEFAULT);
+private:
+  KangarooStatus getSpecial(
+    KangarooGetType type, KangarooGetFlags flags,
+    const KangarooTimeout & timeout);
+  KangarooMonitor motion(
+    uint8_t motionType, int32_t motionValue,
+    uint8_t limit1Type, int32_t limit1Value,
+    uint8_t limit2Type, int32_t limit2Value,
+    KangarooMoveFlags flags);
+  KangarooMonitor set(
+    KangarooCommand command, KangarooCommandWriter & contents,
+    KangarooMoveFlags moveFlags = KANGAROO_MOVE_DEFAULT,
+    KangarooGetType getType = KANGAROO_GETP);
+  void setNoReply(
+    KangarooCommand command, KangarooCommandWriter & contents,
+    KangarooMoveFlags moveFlags = KANGAROO_MOVE_DEFAULT);
 
-  bool getInitialSequenceCodeIfNecessary(const KangarooTimeout& timeout,
-                                         KangarooStatus& status);
-  bool updateMonitoredResult(const KangarooTimeout& timeout,
-                             bool acceptRepliesWithStartupSequenceCode);
+  bool getInitialSequenceCodeIfNecessary(
+    const KangarooTimeout & timeout,
+    KangarooStatus & status);
+  bool updateMonitoredResult(
+    const KangarooTimeout & timeout,
+    bool acceptRepliesWithStartupSequenceCode);
 
- private:
-  KangarooChannel(KangarooChannel& channel);  // no copy
-  void operator=(KangarooChannel& channel);
+private:
+  KangarooChannel(KangarooChannel & channel);  // no copy
+  void operator=(KangarooChannel & channel);
 
- private:
-  KangarooSerial& _serial;
+private:
+  KangarooSerial & _serial;
   char _name;
   uint8_t _address;
   int32_t _commandRetryInterval;

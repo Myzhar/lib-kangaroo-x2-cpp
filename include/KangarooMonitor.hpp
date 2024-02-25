@@ -12,17 +12,18 @@ class KangarooTimeout;
 \brief Makes it easy to track the status of position commands, speed commands,
 and any other commands that take time to complete.
 */
-class KangarooMonitor {
+class KangarooMonitor
+{
   friend class KangarooChannel;
 
- public:
+public:
   /*!
   Constructs a KangarooMonitor object.
   This must be assigned before it will be valid.
   */
   KangarooMonitor();
 
- public:
+public:
   /*!
   Gets the most recently received status.
   \return A KangarooStatus.
@@ -55,7 +56,7 @@ class KangarooMonitor {
   \param timeout The timeout object to use.
   \return The same KangarooMonitor.
   */
-  KangarooMonitor update(const KangarooTimeout& timeout);
+  KangarooMonitor update(const KangarooTimeout & timeout);
 
   /*!
   Waits until KangarooStatus::done() returns true or the timeout expires.
@@ -69,14 +70,15 @@ class KangarooMonitor {
   \param timeout The timeout object to use.
   \return The same KangarooMonitor.
   */
-  KangarooMonitor wait(const KangarooTimeout& timeout);
+  KangarooMonitor wait(const KangarooTimeout & timeout);
 
- private:
-  KangarooMonitor(KangarooChannel* channel, uint32_t monitorCode);
+private:
+  KangarooMonitor(KangarooChannel * channel, uint32_t monitorCode);
 
- private:
-  struct State {
-    KangarooChannel* channel;
+private:
+  struct State
+  {
+    KangarooChannel * channel;
     uint32_t monitorCode;
   } _state;
 };
@@ -89,8 +91,9 @@ Waits until all of the monitors are done or the timeout expires.
 \return True if all of the monitors are done, or false if the timeout expired.
 \remark If a monitor is null, it is ignored.
 */
-bool waitAll(size_t count, KangarooMonitor* monitors[],
-             int32_t timeoutMS = KANGAROO_INFINITE_TIMEOUT);
+bool waitAll(
+  size_t count, KangarooMonitor * monitors[],
+  int32_t timeoutMS = KANGAROO_INFINITE_TIMEOUT);
 
 /*!
 Waits until all of the monitors are done or the timeout object expires.
@@ -100,8 +103,9 @@ Waits until all of the monitors are done or the timeout object expires.
 \return True if all of the monitors are done, or false if the timeout expired.
 \remark If a monitor is null, it is ignored.
 */
-bool waitAll(size_t count, KangarooMonitor* monitors[],
-             const KangarooTimeout& timeout);
+bool waitAll(
+  size_t count, KangarooMonitor * monitors[],
+  const KangarooTimeout & timeout);
 
 /*!
 Waits until at least one of the monitors is done or the timeout expires.
@@ -111,8 +115,9 @@ Waits until at least one of the monitors is done or the timeout expires.
 \return The array index of the monitor that is done, or -1 if the timeout
 expired. \remark If a monitor is null, it is ignored.
 */
-int waitAny(size_t count, KangarooMonitor* monitors[],
-            int32_t timeoutMS = KANGAROO_INFINITE_TIMEOUT);
+int waitAny(
+  size_t count, KangarooMonitor * monitors[],
+  int32_t timeoutMS = KANGAROO_INFINITE_TIMEOUT);
 
 /*!
 Waits until at least one of the monitors is done or the timeout expires.
@@ -122,7 +127,8 @@ Waits until at least one of the monitors is done or the timeout expires.
 \return The array index of the monitor that is done, or -1 if the timeout
 expired. \remark If a monitor is null, it is ignored.
 */
-int waitAny(size_t count, KangarooMonitor* monitors[],
-            const KangarooTimeout& timeout);
+int waitAny(
+  size_t count, KangarooMonitor * monitors[],
+  const KangarooTimeout & timeout);
 
 #endif  // KANGAROO_MONITOR_HPP

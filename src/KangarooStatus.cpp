@@ -20,9 +20,10 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooReplyReader.hpp"
 
-KangarooStatus::KangarooStatus() { init(); }
+KangarooStatus::KangarooStatus() {init();}
 
-KangarooStatus::KangarooStatus(const uint8_t* data, size_t length) {
+KangarooStatus::KangarooStatus(const uint8_t * data, size_t length)
+{
   init();
   if (parse(data, length)) {
     _valid = true;
@@ -31,15 +32,18 @@ KangarooStatus::KangarooStatus(const uint8_t* data, size_t length) {
   }
 }
 
-KangarooStatus KangarooStatus::createInvalidStatus() {
+KangarooStatus KangarooStatus::createInvalidStatus()
+{
   return createFromError(KANGAROO_INVALID_STATUS);
 }
 
-KangarooStatus KangarooStatus::createTimedOut() {
+KangarooStatus KangarooStatus::createTimedOut()
+{
   return createFromError(KANGAROO_TIMED_OUT);
 }
 
-KangarooStatus KangarooStatus::createFromError(KangarooError error) {
+KangarooStatus KangarooStatus::createFromError(KangarooError error)
+{
   KangarooStatus result;
   result._valid = true;
   result._flags = (uint8_t)KANGAROO_STATUS_ERROR;
@@ -47,13 +51,15 @@ KangarooStatus KangarooStatus::createFromError(KangarooError error) {
   return result;
 }
 
-void KangarooStatus::init() {
+void KangarooStatus::init()
+{
   _valid = false;
   _channel = _flags = _echoCode = _sequenceCode = _type = 0;
   _value = 0;
 }
 
-bool KangarooStatus::parse(const uint8_t* data, size_t length) {
+bool KangarooStatus::parse(const uint8_t * data, size_t length)
+{
   KangarooReplyReader parser(data, length);
 
   if (!parser.tryRead(&_channel)) {

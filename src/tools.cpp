@@ -2,16 +2,18 @@
 
 #include <math.h>
 
-uint64_t millis() {
+uint64_t millis()
+{
   auto now = std::chrono::system_clock::now();
   auto duration = now.time_since_epoch();
   uint64_t msec =
-      std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+    std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
 
   return msec;
 }
 
-std::string toString(KangarooError err) {
+std::string toString(KangarooError err)
+{
   switch (err) {
     case KangarooError::KANGAROO_NO_ERROR:
       return std::string("no error");
@@ -48,12 +50,14 @@ std::string toString(KangarooError err) {
   }
 }
 
-bool calculateDiffDriveUnits(const float wheel_radius, const float wheel_dist,
-                             const uint32_t encoder_lines,
-                             const float gear_ratio_mul,
-                             uint32_t& out_drive_dist,
-                             uint32_t& out_drive_lines,
-                             uint32_t& out_turn_lines) {
+bool calculateDiffDriveUnits(
+  const float wheel_radius, const float wheel_dist,
+  const uint32_t encoder_lines,
+  const float gear_ratio_mul,
+  uint32_t & out_drive_dist,
+  uint32_t & out_drive_lines,
+  uint32_t & out_turn_lines)
+{
   // ----> Forwarding
   float F = 2.0f * M_PI * wheel_radius;
   out_drive_dist = static_cast<uint32_t>(std::round(F));

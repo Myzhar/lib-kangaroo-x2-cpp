@@ -22,12 +22,14 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooCRC.hpp"
 
-KangarooReplyReceiver::KangarooReplyReceiver() {
+KangarooReplyReceiver::KangarooReplyReceiver()
+{
   memset(_data, 0, sizeof(_data));
   reset();
 }
 
-void KangarooReplyReceiver::read_byte(uint8_t data) {
+void KangarooReplyReceiver::read_byte(uint8_t data)
+{
   if (data >= 128 || _ready) {
     reset();
   }
@@ -44,7 +46,8 @@ void KangarooReplyReceiver::read_byte(uint8_t data) {
   }
 }
 
-void KangarooReplyReceiver::reset() {
+void KangarooReplyReceiver::reset()
+{
   _length = 0;
   _ready = false;
 }

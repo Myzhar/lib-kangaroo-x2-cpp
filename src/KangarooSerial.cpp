@@ -20,9 +20,11 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooReplyReceiver.hpp"
 
-KangarooSerial::KangarooSerial(Stream& port) : _port(port) {}
+KangarooSerial::KangarooSerial(Stream & port)
+: _port(port) {}
 
-bool KangarooSerial::tryReceivePacket() {
+bool KangarooSerial::tryReceivePacket()
+{
   while (1) {
     uint8_t data;
     if (!port().readByte(data)) {

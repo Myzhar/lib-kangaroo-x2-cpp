@@ -6,7 +6,8 @@
 #include "Kangaroo.hpp"
 #include "tools.hpp"
 
-int main(int argc, char *argv[]) {
+int main(int argc, char * argv[])
+{
   (void)argc;
   (void)argv;
 
@@ -19,8 +20,9 @@ int main(int argc, char *argv[]) {
   uint32_t enc_lines = 100;
   float gear_ratio = 18.33333333333333333333f;
   uint32_t out_d_dist, out_d_lines, out_t_lines;
-  calculateDiffDriveUnits(radius, baseline, enc_lines, gear_ratio, out_d_dist,
-                          out_d_lines, out_t_lines);
+  calculateDiffDriveUnits(
+    radius, baseline, enc_lines, gear_ratio, out_d_dist,
+    out_d_lines, out_t_lines);
 
   std::cout << "Robot Configuration: " << std::endl;
   std::cout << " * Wheel radius: " << radius << " mm" << std::endl;
@@ -79,7 +81,7 @@ int main(int argc, char *argv[]) {
 
   // ----> Set drive units
   err = drive.units(out_d_dist, out_d_lines);  // 100 CPR, 180 mm wheel
-                                 // radius, 320 mm wheelbase
+  // radius, 320 mm wheelbase
   if (err != KANGAROO_NO_ERROR) {
     std::cerr << "Error setting drive units: " << toString(err) << std::endl;
     return EXIT_FAILURE;
@@ -87,7 +89,7 @@ int main(int argc, char *argv[]) {
   std::cout << " * Channel 'D' unit set" << std::endl;
 
   err =
-      turn.units(360, out_t_lines);  // 100 CPR, 180 mm wheel radius, 320 mm wheelbase
+    turn.units(360, out_t_lines);    // 100 CPR, 180 mm wheel radius, 320 mm wheelbase
   if (err != KANGAROO_NO_ERROR) {
     std::cerr << "Error setting turn units: " << toString(err) << std::endl;
     return EXIT_FAILURE;
@@ -116,7 +118,7 @@ int main(int argc, char *argv[]) {
   int d_acc = 2000;
   int t_acc = 720;
 
-  int read_count = 150;  
+  int read_count = 150;
 
   drive.setSpeed(0, d_acc);
   turn.setSpeed(0, t_acc);
@@ -157,7 +159,7 @@ int main(int argc, char *argv[]) {
     }
 
     err =
-        drive.setSpeed(d_speed, d_acc, KANGAROO_MOVE_DEFAULT).status().error();
+      drive.setSpeed(d_speed, d_acc, KANGAROO_MOVE_DEFAULT).status().error();
     if (err != KANGAROO_NO_ERROR) {
       std::cerr << "Error setting forward speed: " << toString(err)
                 << std::endl;

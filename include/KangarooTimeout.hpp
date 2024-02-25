@@ -9,15 +9,16 @@
 
 The same KangarooTimeout can be reused between different calls.
 */
-class KangarooTimeout {
- public:
+class KangarooTimeout
+{
+public:
   /*!
   Constructs a KangarooTimeout object. The starting time is captured.
   \param timeoutMS The timeout duration, in milliseconds.
   */
   KangarooTimeout(uint64_t timeoutMS);
 
- public:
+public:
   /*!
   Gets whether the timeout can expire.
   If the KangarooTimeout was created with a timeout of
@@ -43,7 +44,7 @@ class KangarooTimeout {
   */
   void reset();
 
- private:
+private:
   int64_t _start;
   int64_t _timeoutMS;
 };

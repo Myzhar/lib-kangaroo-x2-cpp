@@ -18,9 +18,10 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooCRC.hpp"
 
-void KangarooCRC::begin() { _crc = 0x3fff; }
+void KangarooCRC::begin() {_crc = 0x3fff;}
 
-void KangarooCRC::write(uint8_t data) {
+void KangarooCRC::write(uint8_t data)
+{
   _crc ^= data & 0x7f;
 
   for (uint8_t bit = 0; bit < 7; bit++) {
@@ -33,15 +34,17 @@ void KangarooCRC::write(uint8_t data) {
   }
 }
 
-void KangarooCRC::write(const uint8_t* data, size_t lengthOfData) {
+void KangarooCRC::write(const uint8_t * data, size_t lengthOfData)
+{
   for (size_t i = 0; i < lengthOfData; i++) {
     write(data[i]);
   }
 }
 
-void KangarooCRC::end() { _crc ^= 0x3fff; }
+void KangarooCRC::end() {_crc ^= 0x3fff;}
 
-uint16_t KangarooCRC::value(const uint8_t* data, size_t lengthOfData) {
+uint16_t KangarooCRC::value(const uint8_t * data, size_t lengthOfData)
+{
   KangarooCRC crc;
   crc.begin();
   crc.write(data, lengthOfData);

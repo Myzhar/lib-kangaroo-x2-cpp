@@ -22,60 +22,73 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 #include "KangarooStatus.hpp"
 #include "KangarooTimeout.hpp"
 
-KangarooMonitor::KangarooMonitor() {
+KangarooMonitor::KangarooMonitor()
+{
   _state.channel = 0;
   _state.monitorCode = 0;
 }
 
-KangarooMonitor::KangarooMonitor(KangarooChannel* channel,
-                                 uint32_t monitorCode) {
+KangarooMonitor::KangarooMonitor(
+  KangarooChannel * channel,
+  uint32_t monitorCode)
+{
   _state.channel = channel;
   _state.monitorCode = monitorCode;
 }
 
-KangarooStatus KangarooMonitor::status() const {
-  return valid() ? _state.channel->_monitoredGetResult
-                 : KangarooStatus::createInvalidStatus();
+KangarooStatus KangarooMonitor::status() const
+{
+  return valid() ? _state.channel->_monitoredGetResult :
+         KangarooStatus::createInvalidStatus();
 }
 
-bool KangarooMonitor::valid() const {
+bool KangarooMonitor::valid() const
+{
   return _state.channel && _state.monitorCode == _state.channel->_monitorCode;
 }
 
-KangarooMonitor KangarooMonitor::update() {
+KangarooMonitor KangarooMonitor::update()
+{
   return update(_state.channel->commandTimeout());
 }
 
-KangarooMonitor KangarooMonitor::update(int32_t timeoutMS) {
+KangarooMonitor KangarooMonitor::update(int32_t timeoutMS)
+{
   KangarooTimeout timeout(timeoutMS);
   return update(timeout);
 }
 
-KangarooMonitor KangarooMonitor::update(const KangarooTimeout& timeout) {
-  while (valid() && !_state.channel->updateMonitoredResult(timeout, true))
-    ;
+KangarooMonitor KangarooMonitor::update(const KangarooTimeout & timeout)
+{
+  while (valid() && !_state.channel->updateMonitoredResult(timeout, true)) {
+  }
   return *this;
 }
 
-KangarooMonitor KangarooMonitor::wait(int32_t timeoutMS) {
+KangarooMonitor KangarooMonitor::wait(int32_t timeoutMS)
+{
   KangarooTimeout timeout(timeoutMS);
   return wait(timeout);
 }
 
-KangarooMonitor KangarooMonitor::wait(const KangarooTimeout& timeout) {
+KangarooMonitor KangarooMonitor::wait(const KangarooTimeout & timeout)
+{
   while (!status().done()) {
     update(timeout);
   }
   return *this;
 }
 
-bool waitAll(size_t count, KangarooMonitor* monitors[], int32_t timeoutMS) {
+bool waitAll(size_t count, KangarooMonitor * monitors[], int32_t timeoutMS)
+{
   KangarooTimeout timeout(timeoutMS);
   return waitAll(count, monitors, timeout);
 }
 
-bool waitAll(size_t count, KangarooMonitor* monitors[],
-             const KangarooTimeout& timeout) {
+bool waitAll(
+  size_t count, KangarooMonitor * monitors[],
+  const KangarooTimeout & timeout)
+{
   for (size_t i = 0; i < count; i++) {
     if (!monitors[i]) {
       continue;
@@ -91,13 +104,16 @@ bool waitAll(size_t count, KangarooMonitor* monitors[],
   return true;
 }
 
-int waitAny(size_t count, KangarooMonitor* monitors[], int32_t timeoutMS) {
+int waitAny(size_t count, KangarooMonitor * monitors[], int32_t timeoutMS)
+{
   KangarooTimeout timeout(timeoutMS);
   return waitAny(count, monitors, timeout);
 }
 
-int waitAny(size_t count, KangarooMonitor* monitors[],
-            const KangarooTimeout& timeout) {
+int waitAny(
+  size_t count, KangarooMonitor * monitors[],
+  const KangarooTimeout & timeout)
+{
   while (1) {
     if (timeout.expired()) {
       return -1;

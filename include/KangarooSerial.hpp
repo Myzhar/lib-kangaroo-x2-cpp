@@ -10,33 +10,34 @@
 \brief Create a KangarooSerial for the serial port you are using, and then
 attach a KangarooChannel for each channel you want to communicate with.
 */
-class KangarooSerial {
+class KangarooSerial
+{
   friend class KangarooChannel;
 
- public:
+public:
   /*!
   Constructs a KangarooSerial object.
   \param port The serial port the motion controller is on.
   */
-  explicit KangarooSerial(Stream& port);
+  explicit KangarooSerial(Stream & port);
 
- public:
+public:
   /*!
   Gets the serial port being used.
   \return The serial port.
   */
-  inline Stream& port() { return _port; }
+  inline Stream & port() {return _port;}
 
- private:
+private:
   bool tryReceivePacket();
 
- private:
-  KangarooSerial(KangarooSerial& serial);  // no copy
-  void operator=(KangarooSerial& serial);
+private:
+  KangarooSerial(KangarooSerial & serial);  // no copy
+  void operator=(KangarooSerial & serial);
 
- private:
+private:
   KangarooReplyReceiver _receiver;
-  Stream& _port;
+  Stream & _port;
 };
 
 #endif  // KANGAROO_SERIAL_HPP

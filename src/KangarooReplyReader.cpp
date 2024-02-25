@@ -18,12 +18,13 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooReplyReader.hpp"
 
-KangarooReplyReader::KangarooReplyReader(const uint8_t* data, size_t length)
-    : _data(data), _dataEnd(data + length) {}
+KangarooReplyReader::KangarooReplyReader(const uint8_t * data, size_t length)
+: _data(data), _dataEnd(data + length) {}
 
-bool KangarooReplyReader::canRead() const { return _data != _dataEnd; }
+bool KangarooReplyReader::canRead() const {return _data != _dataEnd;}
 
-bool KangarooReplyReader::tryRead(uint8_t* value) {
+bool KangarooReplyReader::tryRead(uint8_t * value)
+{
   if (canRead()) {
     *value = read();
     return true;
@@ -32,18 +33,19 @@ bool KangarooReplyReader::tryRead(uint8_t* value) {
   }
 }
 
-uint8_t KangarooReplyReader::read() {
+uint8_t KangarooReplyReader::read()
+{
   uint8_t data = *_data;
   _data++;
   return data;
 }
 
-int32_t KangarooReplyReader::readBitPackedNumber() {
+int32_t KangarooReplyReader::readBitPackedNumber()
+{
   uint32_t encodedNumber = 0;
   uint8_t shift = 0;
 
-  for (uint8_t i = 0; i < 5; i++)  // 30 bits
-  {
+  for (uint8_t i = 0; i < 5; i++) { // 30 bits
     uint8_t uint8_t;
     if (!tryRead(&uint8_t)) {
       break;
@@ -56,6 +58,6 @@ int32_t KangarooReplyReader::readBitPackedNumber() {
     }
   }
 
-  return (encodedNumber & 1) ? -(int32_t)(encodedNumber >> 1)
-                             : (int32_t)(encodedNumber >> 1);
+  return (encodedNumber & 1) ? -(int32_t)(encodedNumber >> 1) :
+         (int32_t)(encodedNumber >> 1);
 }

@@ -7,7 +7,8 @@
 
 #define TUNE_MODE_NUMBER 1
 
-int main(int argc, char *argv[]) {
+int main(int argc, char * argv[])
+{
   (void)argc;
   (void)argv;
 
@@ -21,8 +22,9 @@ int main(int argc, char *argv[]) {
   uint32_t enc_lines = 100;
   float gear_ratio = 18.33333333333333333333f;
   uint32_t out_d_dist, out_d_lines, out_t_lines;
-  calculateDiffDriveUnits(radius, baseline, enc_lines, gear_ratio, out_d_dist,
-                          out_d_lines, out_t_lines);
+  calculateDiffDriveUnits(
+    radius, baseline, enc_lines, gear_ratio, out_d_dist,
+    out_d_lines, out_t_lines);
 
   std::cout << "Robot Configuration: " << std::endl;
   std::cout << " * Wheel radius: " << radius << " mm" << std::endl;
@@ -75,7 +77,7 @@ int main(int argc, char *argv[]) {
   std::cout << " * Channel 'D' unit set" << std::endl;
 
   err = turn.units(
-      360, out_t_lines);  // 100 CPR, 180 mm wheel radius, 320 mm wheelbase
+    360, out_t_lines);    // 100 CPR, 180 mm wheel radius, 320 mm wheelbase
   if (err != KANGAROO_NO_ERROR) {
     std::cerr << "Error setting turn units: " << toString(err) << std::endl;
     return EXIT_FAILURE;
@@ -86,8 +88,9 @@ int main(int argc, char *argv[]) {
 
   // ---> Enter the desired tune mode.
   int32_t enterModeParams[1] = {TUNE_MODE_NUMBER};
-  err = drive.systemCommand(KANGAROO_SYS_TUNE_ENTER_MODE, false,
-                            enterModeParams, 1);
+  err = drive.systemCommand(
+    KANGAROO_SYS_TUNE_ENTER_MODE, false,
+    enterModeParams, 1);
 
   if (err != KANGAROO_NO_ERROR) {
     std::cerr << "KANGAROO_SYS_TUNE_ENTER_MODE error: " << toString(err)
@@ -98,8 +101,9 @@ int main(int argc, char *argv[]) {
 
   // ----> Set the disabled channel bitmask to 0 (tune all channels)
   int32_t disableChannelsParams[1] = {0};
-  err = drive.systemCommand(KANGAROO_SYS_TUNE_SET_DISABLED_CHANNELS, false,
-                            disableChannelsParams, 1);
+  err = drive.systemCommand(
+    KANGAROO_SYS_TUNE_SET_DISABLED_CHANNELS, false,
+    disableChannelsParams, 1);
   if (err != KANGAROO_NO_ERROR) {
     std::cerr << "KANGAROO_SYS_TUNE_ENTER_MODE error: " << toString(err)
               << std::endl;
