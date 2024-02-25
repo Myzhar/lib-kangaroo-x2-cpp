@@ -85,7 +85,7 @@ set(LIB_SRC
 
 ##################################################################
 # BUILD
-add_library(${PROJECT_NAME}
+add_library(${PROJECT_NAME} SHARED
     ${LIB_INC}
     ${LIB_SRC}
 )
@@ -116,10 +116,16 @@ endif()
 ##################################################################
 
 ##################################################################
-# Install 
+# Install library
 install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
+)
+
+# Install header files
+install(DIRECTORY
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/
+    DESTINATION include/${PROJECT_NAME}/
 )
 ##################################################################
