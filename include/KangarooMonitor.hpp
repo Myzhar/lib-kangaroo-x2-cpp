@@ -79,11 +79,8 @@ private:
   KangarooMonitor(KangarooChannel * channel, uint32_t monitorCode);
 
 private:
-  struct State
-  {
-    KangarooChannel * channel;
-    uint32_t monitorCode;
-  } _state;
+  KangarooChannel * _channel = nullptr;
+  uint32_t _monitorCode = 0;
 };
 
 /*!

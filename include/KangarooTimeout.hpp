@@ -19,7 +19,7 @@ public:
   Constructs a KangarooTimeout object. The starting time is captured.
   \param timeoutMS The timeout duration, in milliseconds.
   */
-  KangarooTimeout(uint64_t timeoutMS);
+  explicit KangarooTimeout(uint64_t timeoutMS);
 
 public:
   /*!

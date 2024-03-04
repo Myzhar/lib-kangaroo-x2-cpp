@@ -27,32 +27,30 @@ namespace kx2
 
 KangarooMonitor::KangarooMonitor()
 {
-  _state.channel = 0;
-  _state.monitorCode = 0;
 }
 
 KangarooMonitor::KangarooMonitor(
   KangarooChannel * channel,
   uint32_t monitorCode)
 {
-  _state.channel = channel;
-  _state.monitorCode = monitorCode;
+  _channel = channel;
+  _monitorCode = monitorCode;
 }
 
 KangarooStatus KangarooMonitor::status() const
 {
-  return valid() ? _state.channel->_monitoredGetResult :
+  return valid() ? _channel->_monitoredGetResult :
          KangarooStatus::createInvalidStatus();
 }
 
 bool KangarooMonitor::valid() const
 {
-  return _state.channel && _state.monitorCode == _state.channel->_monitorCode;
+  return _channel && _monitorCode == _channel->_monitorCode;
 }
 
 KangarooMonitor KangarooMonitor::update()
 {
-  return update(_state.channel->commandTimeout());
+  return update(_channel->commandTimeout());
 }
 
 KangarooMonitor KangarooMonitor::update(int32_t timeoutMS)
@@ -63,7 +61,7 @@ KangarooMonitor KangarooMonitor::update(int32_t timeoutMS)
 
 KangarooMonitor KangarooMonitor::update(const KangarooTimeout & timeout)
 {
-  while (valid() && !_state.channel->updateMonitoredResult(timeout, true)) {
+  while (valid() && !_channel->updateMonitoredResult(timeout, true)) {
   }
   return *this;
 }
