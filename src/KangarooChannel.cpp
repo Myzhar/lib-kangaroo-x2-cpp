@@ -24,6 +24,9 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 #include "KangarooStatus.hpp"
 #include "KangarooTimeout.hpp"
 
+namespace kx2
+{
+
 static uint8_t nextCode(uint8_t code)
 {
   if (++code >= 0x80) {
@@ -406,3 +409,5 @@ bool KangarooChannel::updateMonitoredResult(
 
   return false;
 }
+
+}  // namespace kx2

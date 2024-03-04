@@ -2,6 +2,9 @@
 
 #include <math.h>
 
+namespace kx2
+{
+
 uint64_t millis()
 {
   auto now = std::chrono::system_clock::now();
@@ -72,3 +75,5 @@ bool calculateDiffDriveUnits(
 
   return out_drive_dist != 0 && out_drive_lines != 0 && out_turn_lines != 0;
 }
+
+}  // namespace kx2

@@ -3,6 +3,9 @@
 
 #include "types.hpp"
 
+namespace kx2
+{
+
 /*!
 \class KangarooTimeout
 \brief Encapsulates a starting time and duration.
@@ -48,5 +51,7 @@ private:
   int64_t _start;
   int64_t _timeoutMS;
 };
+
+}  // namespace kx2
 
 #endif  // KANGAROO_TIMEOUT_HPP

@@ -3,6 +3,9 @@
 
 #include "types.hpp"
 
+namespace kx2
+{
+
 class KangarooChannel;
 class KangarooStatus;
 class KangarooTimeout;
@@ -130,5 +133,7 @@ expired. \remark If a monitor is null, it is ignored.
 int waitAny(
   size_t count, KangarooMonitor * monitors[],
   const KangarooTimeout & timeout);
+
+}  // namespace kx2
 
 #endif  // KANGAROO_MONITOR_HPP

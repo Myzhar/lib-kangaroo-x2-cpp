@@ -20,6 +20,9 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "tools.hpp"
 
+namespace kx2
+{
+
 KangarooTimeout::KangarooTimeout(uint64_t timeoutMS)
 : _timeoutMS(timeoutMS)
 {
@@ -43,3 +46,5 @@ void KangarooTimeout::expire()
 }
 
 void KangarooTimeout::reset() {_start = millis();}
+
+}  // namespace kx2

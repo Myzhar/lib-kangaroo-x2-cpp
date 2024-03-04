@@ -4,6 +4,9 @@
 #include "KangarooStatus.hpp"
 #include "types.hpp"
 
+namespace kx2
+{
+
 class KangarooSerial;
 class KangarooStatus;
 class KangarooMonitor;
@@ -406,4 +409,5 @@ private:
   bool _streaming;
 };
 
+} // namespace kx2
 #endif  // KANGAROO_CHANNEL_HPP

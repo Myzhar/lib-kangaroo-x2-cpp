@@ -22,6 +22,9 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 #include "KangarooStatus.hpp"
 #include "KangarooTimeout.hpp"
 
+namespace kx2
+{
+
 KangarooMonitor::KangarooMonitor()
 {
   _state.channel = 0;
@@ -134,3 +137,5 @@ int waitAny(
     }
   }
 }
+
+}  // namespace kx2

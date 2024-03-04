@@ -4,6 +4,8 @@
 #include "Stream.hpp"
 #include "types.hpp"
 
+namespace kx2
+{
 class KangarooCommandWriter
 {
 public:
@@ -39,5 +41,7 @@ private:
   size_t _length;
   uint8_t _data[KANGAROO_COMMAND_MAX_DATA_LENGTH];
 };
+
+}  // namespace kx2
 
 #endif  // KANGAROO_COMMAND_WRITER_HPP

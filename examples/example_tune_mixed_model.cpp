@@ -7,6 +7,8 @@
 
 #define TUNE_MODE_NUMBER 1
 
+using namespace kx2;
+
 int main(int argc, char * argv[])
 {
   (void)argc;

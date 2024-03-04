@@ -6,6 +6,9 @@
 
 #include "types.hpp"
 
+namespace kx2
+{
+
 template<class T>
 const T & constrain(const T & x, const T & a, const T & b)
 {
@@ -29,5 +32,7 @@ bool calculateDiffDriveUnits(
   uint32_t & out_drive_dist,
   uint32_t & out_drive_lines,
   uint32_t & out_turn_lines);
+
+}  // namespace kx2
 
 #endif  // TOOLS_HPP

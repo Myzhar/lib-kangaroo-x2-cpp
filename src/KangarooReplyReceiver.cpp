@@ -22,6 +22,9 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooCRC.hpp"
 
+namespace kx2
+{
+
 KangarooReplyReceiver::KangarooReplyReceiver()
 {
   memset(_data, 0, sizeof(_data));
@@ -51,3 +54,5 @@ void KangarooReplyReceiver::reset()
   _length = 0;
   _ready = false;
 }
+
+}  // namespace kx2

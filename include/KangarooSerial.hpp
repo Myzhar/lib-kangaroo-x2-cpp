@@ -5,6 +5,9 @@
 #include "Stream.hpp"
 #include "types.hpp"
 
+namespace kx2
+{
+
 /*!
 \class KangarooSerial
 \brief Create a KangarooSerial for the serial port you are using, and then
@@ -39,5 +42,7 @@ private:
   KangarooReplyReceiver _receiver;
   Stream & _port;
 };
+
+}  // namespace kx2
 
 #endif  // KANGAROO_SERIAL_HPP

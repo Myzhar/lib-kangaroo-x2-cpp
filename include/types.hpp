@@ -4,6 +4,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
+namespace kx2
+{
+
 #define KANGAROO_BIT_PACKED_MAX_VALUE 536870911
 #define KANGAROO_COMMAND_MAX_DATA_LENGTH 27
 #define KANGAROO_COMMAND_MAX_BUFFER_LENGTH 32
@@ -187,5 +190,7 @@ enum KangarooSystemCommand
 };
 
 enum KangarooReplyCode { KANGAROO_RC_STATUS = 0x43 };
+
+}  // namespace kx2
 
 #endif  // TYPES_HPP

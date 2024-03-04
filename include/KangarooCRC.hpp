@@ -3,6 +3,8 @@
 
 #include "types.hpp"
 
+namespace kx2
+{
 class KangarooCRC
 {
 public:
@@ -20,5 +22,7 @@ public:
 private:
   uint16_t _crc = 0;
 };
+
+}  // namespace kx2
 
 #endif  // KANGAROO_CRC_HPP

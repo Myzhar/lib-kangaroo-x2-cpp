@@ -3,6 +3,8 @@
 
 #include "types.hpp"
 
+namespace kx2
+{
 class KangarooReplyReceiver
 {
 public:
@@ -27,5 +29,7 @@ private:
   bool _ready;
   uint8_t _data[KANGAROO_COMMAND_MAX_BUFFER_LENGTH];
 };
+
+}  // namespace kx2
 
 #endif  // KANGAROO_REPLY_RECEIVER_HPP

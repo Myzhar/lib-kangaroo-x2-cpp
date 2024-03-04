@@ -23,6 +23,9 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 #include "KangarooCRC.hpp"
 #include "tools.hpp"
 
+namespace kx2
+{
+
 KangarooCommandWriter::KangarooCommandWriter()
 : /*_address(0), _command(0),*/ _length(0)
 {
@@ -107,3 +110,5 @@ void KangarooCommandWriter::writeToStream(
     writeToBuffer(buffer, address, command, data, lengthOfData);
   port.writeBuffer(buffer, lengthOfBuffer);
 }
+
+}  // namespace kx2

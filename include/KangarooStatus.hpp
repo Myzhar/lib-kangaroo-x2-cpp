@@ -3,6 +3,9 @@
 
 #include "types.hpp"
 
+namespace kx2
+{
+
 /*!
 \class KangarooStatus
 \brief Stores the response to a status request.
@@ -101,5 +104,7 @@ private:
   uint8_t _channel, _flags, _echoCode, _sequenceCode, _type;
   int32_t _value;
 };
+
+}  // namespace kx2
 
 #endif  // KANGAROO_STATUS_HPP

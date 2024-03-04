@@ -20,6 +20,9 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooReplyReceiver.hpp"
 
+namespace kx2
+{
+
 KangarooSerial::KangarooSerial(Stream & port)
 : _port(port) {}
 
@@ -37,3 +40,5 @@ bool KangarooSerial::tryReceivePacket()
     }
   }
 }
+
+}  // namespace kx2

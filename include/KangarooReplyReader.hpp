@@ -3,6 +3,8 @@
 
 #include "types.hpp"
 
+namespace kx2
+{
 class KangarooReplyReader
 {
 public:
@@ -18,5 +20,6 @@ private:
   const uint8_t * _data;
   const uint8_t * _dataEnd;
 };
+}  // namespace kx2
 
 #endif  // KANGAROO_REPLY_READER_HPP

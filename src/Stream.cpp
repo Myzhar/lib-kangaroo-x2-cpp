@@ -4,6 +4,9 @@
 
 #include <iostream>
 
+namespace kx2
+{
+
 Stream::Stream() {}
 
 Stream::~Stream() {close();}
@@ -63,3 +66,5 @@ bool Stream::readByte(uint8_t & data)
 
   return true;
 }
+
+}  // namespace kx2

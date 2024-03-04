@@ -6,6 +6,8 @@
 #include "Kangaroo.hpp"
 #include "tools.hpp"
 
+using namespace kx2;
+
 int main(int argc, char * argv[])
 {
   (void)argc;

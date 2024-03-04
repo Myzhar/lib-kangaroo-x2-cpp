@@ -18,6 +18,9 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooCRC.hpp"
 
+namespace kx2
+{
+
 void KangarooCRC::begin() {_crc = 0x3fff;}
 
 void KangarooCRC::write(uint8_t data)
@@ -51,3 +54,5 @@ uint16_t KangarooCRC::value(const uint8_t * data, size_t lengthOfData)
   crc.end();
   return crc.value();
 }
+
+}  // namespace kx2

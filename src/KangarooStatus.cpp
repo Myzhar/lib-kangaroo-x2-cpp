@@ -20,6 +20,9 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooReplyReader.hpp"
 
+namespace kx2
+{
+
 KangarooStatus::KangarooStatus() {init();}
 
 KangarooStatus::KangarooStatus(const uint8_t * data, size_t length)
@@ -97,3 +100,5 @@ bool KangarooStatus::parse(const uint8_t * data, size_t length)
 
   return true;
 }
+
+}  // namespace kx2

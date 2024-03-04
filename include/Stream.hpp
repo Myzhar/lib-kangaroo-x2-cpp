@@ -8,6 +8,8 @@
 
 #include "types.hpp"
 
+namespace kx2
+{
 class Stream
 {
 private:
@@ -30,5 +32,7 @@ protected:
 private:
   std::shared_ptr<LibSerial::SerialPort> _serial;
 };
+
+}  // namespace kx2
 
 #endif  // STREAM_HPP

@@ -18,6 +18,9 @@ USE OR PERFORMANCE OF THIS SOFTWARE.
 
 #include "KangarooReplyReader.hpp"
 
+namespace kx2
+{
+
 KangarooReplyReader::KangarooReplyReader(const uint8_t * data, size_t length)
 : _data(data), _dataEnd(data + length) {}
 
@@ -61,3 +64,5 @@ int32_t KangarooReplyReader::readBitPackedNumber()
   return (encodedNumber & 1) ? -(int32_t)(encodedNumber >> 1) :
          (int32_t)(encodedNumber >> 1);
 }
+
+}  // namespace kx2
